@@ -1,62 +1,37 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using banking_api.Models;
+using banking_api.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace banking_api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route( "[controller]" )]
     public class TransactionController : ControllerBase
     {
         private readonly ILogger<TransactionController> _logger;
-        private readonly IList<Transaction> _transactions ;
+        private readonly ITransactionService _transactionService;
 
-        public TransactionController(ILogger<TransactionController> logger)
+        public TransactionController( ILogger<TransactionController> logger, ITransactionService transactionService )
         {
             _logger = logger;
-            _transactions = new List<Transaction>
-            {
-                new Transaction
-                {
-                    UserId = 1,
-                    Amount = 10,
-                    TransactionLocation = "USA"
-                },
-                new Transaction
-                {
-                    UserId = 2,
-                    Amount = 12,
-                    TransactionLocation = "CANADA"
-                },
-                new Transaction
-                {
-                    UserId = 2,
-                    Amount = 12,
-                    TransactionLocation = "Mexico"
-                }
-            };
+            _transactionService = transactionService;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Transaction>> Get()
+        public ActionResult<IList<Transaction>> Get()
         {
-            return _transactions.ToArray();
+            return _transactionService.GetAll().ToList();
         }
 
         [HttpPost]
-        public IActionResult Post(Transaction transaction)
+        public IActionResult Post( Transaction transaction )
         {
-           _transactions.Add(transaction);
+            _transactionService.AddTransaction( transaction );
 
-            return new OkObjectResult(transaction);
+            return new OkObjectResult( transaction );
         }
-    }
-
-    public class Transaction
-    {
-        public int UserId { get; set; }
-        public int Amount { get; set; }
-        public string TransactionLocation { get; set; }
     }
 }
