@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace banking_api.Controllers
 {
     [ApiController]
-    [Route( "[controller]" )]
+    [Route( "transaction" )]
     public class TransactionController : ControllerBase
     {
         private readonly ILogger<TransactionController> _logger;
@@ -21,9 +21,9 @@ namespace banking_api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IList<Transaction>> Get()
+        public ActionResult<IList<Transaction>> Get( bool validTransactions = true )
         {
-            return _transactionService.GetAll().ToList();
+            return _transactionService.GetAllTransactions().ToList();
         }
 
         [HttpPost]
@@ -32,6 +32,13 @@ namespace banking_api.Controllers
             _transactionService.AddTransaction( transaction );
 
             return new OkObjectResult( transaction );
+        }
+
+        [HttpGet]
+        [Route("filtered")]
+        public ActionResult<IList<Transaction>> FilteredTransactions(bool validTransactions = true)
+        {
+            return new OkObjectResult( _transactionService.GetValidOrSuspicious( validTransactions ).ToList() );
         }
     }
 }

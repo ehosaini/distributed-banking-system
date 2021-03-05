@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using banking_api.Models;
 
 namespace banking_api.Services
@@ -9,7 +10,7 @@ namespace banking_api.Services
     class TransactionService : ITransactionService
     {
         private readonly IList<Transaction> _transactions;
-        private readonly IList<User>_users;
+        private readonly IList<User> _users;
 
         public TransactionService()
         {
@@ -17,7 +18,7 @@ namespace banking_api.Services
             _users = LoadUsers();
         }
 
-        public IReadOnlyCollection<Transaction> GetAll()
+        public IReadOnlyCollection<Transaction> GetAllTransactions()
         {
             return new ReadOnlyCollection<Transaction>( _transactions );
         }
@@ -32,6 +33,18 @@ namespace banking_api.Services
             _transactions.Add( transaction );
 
             return transaction;
+        }
+
+        public IReadOnlyCollection<Transaction> GetValidOrSuspicious( bool valid = true )
+        {
+            var transactions = _transactions.Where( t =>
+            {
+                var any = _users.Any( u => u.Id == t.UserId && u.Country == t.TransactionLocation );
+
+                return valid ? any : !any;
+            } );
+
+            return new ReadOnlyCollection<Transaction>( transactions.ToList() );
         }
 
         private static IList<Transaction> LoadTransactions()
@@ -62,11 +75,23 @@ namespace banking_api.Services
                     UserId = 4,
                     Amount = 10,
                     TransactionLocation = "USA"
+                },
+                new Transaction
+                {
+                    UserId = 6,
+                    Amount = 10,
+                    TransactionLocation = "USA"
+                },
+                new Transaction
+                {
+                    UserId = 16,
+                    Amount = 10,
+                    TransactionLocation = "Mexico"
                 }
             };
         }
 
-        private IList<User> LoadUsers()
+        private static IList<User> LoadUsers()
         {
             return new List<User>
             {
@@ -82,13 +107,8 @@ namespace banking_api.Services
                 },
                 new User
                 {
-                    Id = 1,
+                    Id = 3,
                     Country = "Mexico"
-                },
-                new User
-                {
-                    Id = 1,
-                    Country = "USA"
                 }
             };
         }
