@@ -21,9 +21,9 @@ namespace banking_api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IList<Transaction>> Get( bool validTransactions = true )
+        public ActionResult<IList<Transaction>> Get()
         {
-            return _transactionService.GetAllTransactions().ToList();
+            return new OkObjectResult( _transactionService.GetAllTransactions().ToList() );
         }
 
         [HttpPost]
@@ -35,8 +35,8 @@ namespace banking_api.Controllers
         }
 
         [HttpGet]
-        [Route("filtered")]
-        public ActionResult<IList<Transaction>> FilteredTransactions(bool validTransactions = true)
+        [Route( "filtered" )]
+        public ActionResult<IList<Transaction>> FilteredTransactions( bool validTransactions = true )
         {
             return new OkObjectResult( _transactionService.GetValidOrSuspicious( validTransactions ).ToList() );
         }
