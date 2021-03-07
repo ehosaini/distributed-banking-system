@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "reporting-service", "report
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "user-notification-service", "user-notification-service\user-notification-service.csproj", "{711DFD34-CFA8-4C56-A4BC-6F3230B4B2B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "account-manager-service", "account-manager-service\account-manager-service.csproj", "{BA1A7E45-5578-427E-A319-36F2FFDEA10F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{711DFD34-CFA8-4C56-A4BC-6F3230B4B2B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{711DFD34-CFA8-4C56-A4BC-6F3230B4B2B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{711DFD34-CFA8-4C56-A4BC-6F3230B4B2B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA1A7E45-5578-427E-A319-36F2FFDEA10F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA1A7E45-5578-427E-A319-36F2FFDEA10F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA1A7E45-5578-427E-A319-36F2FFDEA10F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA1A7E45-5578-427E-A319-36F2FFDEA10F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
