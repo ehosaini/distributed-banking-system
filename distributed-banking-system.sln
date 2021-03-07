@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "banking-api", "banking-api\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "reporting-service", "reporting-service\reporting-service.csproj", "{38A59293-86B2-4C9F-9CA1-A8D6300C1315}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "user-notification-service", "user-notification-service\user-notification-service.csproj", "{711DFD34-CFA8-4C56-A4BC-6F3230B4B2B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{38A59293-86B2-4C9F-9CA1-A8D6300C1315}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38A59293-86B2-4C9F-9CA1-A8D6300C1315}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38A59293-86B2-4C9F-9CA1-A8D6300C1315}.Release|Any CPU.Build.0 = Release|Any CPU
+		{711DFD34-CFA8-4C56-A4BC-6F3230B4B2B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{711DFD34-CFA8-4C56-A4BC-6F3230B4B2B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{711DFD34-CFA8-4C56-A4BC-6F3230B4B2B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{711DFD34-CFA8-4C56-A4BC-6F3230B4B2B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
