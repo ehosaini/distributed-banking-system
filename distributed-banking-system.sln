@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "user-notification-service",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "account-manager-service", "account-manager-service\account-manager-service.csproj", "{BA1A7E45-5578-427E-A319-36F2FFDEA10F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "core-library", "core-library\core-library.csproj", "{8A5439C8-55B1-4DE9-BDCE-79687FCD6F08}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{33ED9B83-E02E-45C8-82F1-08EAF839980C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +37,16 @@ Global
 		{BA1A7E45-5578-427E-A319-36F2FFDEA10F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA1A7E45-5578-427E-A319-36F2FFDEA10F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA1A7E45-5578-427E-A319-36F2FFDEA10F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A5439C8-55B1-4DE9-BDCE-79687FCD6F08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A5439C8-55B1-4DE9-BDCE-79687FCD6F08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A5439C8-55B1-4DE9-BDCE-79687FCD6F08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A5439C8-55B1-4DE9-BDCE-79687FCD6F08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8A5439C8-55B1-4DE9-BDCE-79687FCD6F08} = {33ED9B83-E02E-45C8-82F1-08EAF839980C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {78644E02-5DD4-4FEB-82B6-CE3E1EF94C79}
