@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using banking_api.Models;
+using core_library.DTOs;
+using core_library.Models;
 
 namespace banking_api.Services
 {
@@ -35,7 +36,7 @@ namespace banking_api.Services
             return transaction;
         }
 
-        public IReadOnlyCollection<Transaction> GetValidOrSuspicious( bool valid = true )
+        public IReadOnlyCollection<TransactionDto> GetValidOrSuspicious( bool valid = true )
         {
             var transactions = _transactions.Where( t =>
             {
@@ -44,7 +45,18 @@ namespace banking_api.Services
                 return valid ? any : !any;
             } );
 
-            return new ReadOnlyCollection<Transaction>( transactions.ToList() );
+            IEnumerable<TransactionDto> converted;
+
+            
+            converted = transactions.Select(t => new TransactionDto { 
+                UserId = t.UserId,
+                Amount = t.Amount,
+                TransactionLocation = t.TransactionLocation,
+                Suspecious = !valid // inverse relationship with valid transactions
+            } );
+
+
+            return new ReadOnlyCollection<TransactionDto>( converted.ToList() );
         }
 
         private static IList<Transaction> LoadTransactions()

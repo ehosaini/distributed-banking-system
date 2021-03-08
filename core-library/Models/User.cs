@@ -1,4 +1,4 @@
-﻿namespace banking_api.Models
+﻿namespace core_library.Models
 {
     public class User
     {

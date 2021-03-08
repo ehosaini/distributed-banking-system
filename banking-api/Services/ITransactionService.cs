@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using banking_api.Models;
+using core_library.DTOs;
+using core_library.Models;
 
 namespace banking_api.Services
 {
@@ -9,6 +10,6 @@ namespace banking_api.Services
         public IReadOnlyCollection<Transaction> GetAllTransactions();
         public Transaction GetTransaction( int id );
         public Transaction AddTransaction( Transaction transaction );
-        public IReadOnlyCollection<Transaction> GetValidOrSuspicious( bool valid = true );
+        public IReadOnlyCollection<TransactionDto> GetValidOrSuspicious( bool valid = true );
     }
 }
