@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using reporting_service.Services;
 
 namespace reporting_service
 {
@@ -32,6 +33,9 @@ namespace reporting_service
              {
                  c.SwaggerDoc( "v1", new OpenApiInfo { Title = "reporting_service", Version = "v1" } );
              } );
+
+            // services
+            services.AddSingleton<ITransactionService, TransactionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

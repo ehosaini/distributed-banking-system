@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using reporting_service.Services;
 
 namespace reporting_service.Controllers
 {
@@ -12,17 +14,26 @@ namespace reporting_service.Controllers
     public class ReportController : ControllerBase
     {
         private readonly ILogger<ReportController> _logger;
+        private readonly ITransactionService _transactionService;
 
-        public ReportController( ILogger<ReportController> logger )
+        public ReportController( ILogger<ReportController> logger, ITransactionService transactionService )
         {
             _logger = logger;
+            _transactionService = transactionService;
         }
 
         [HttpGet]
-        [Route("suspicious-transaction")]
-        public void Get()
+        [Route( "transaction" )]
+        public IActionResult Get()
         {
-            throw new NotImplementedException();
+            return new OkObjectResult( _transactionService.GetAllTransactions() );
+        }
+
+        [HttpGet]
+        [Route( "transaction/tagged" )]
+        public IActionResult Get( bool valid = true )
+        {
+            return new OkObjectResult( _transactionService.FilterTransactions( valid ) );
         }
     }
 }
