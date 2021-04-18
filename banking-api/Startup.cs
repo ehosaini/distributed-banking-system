@@ -1,3 +1,4 @@
+using System.Net.Http;
 using banking_api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,7 +29,7 @@ namespace banking_api
              } );
 
             // services
-            services.AddSingleton<ITransactionService, TransactionService>();
+            services.AddSingleton<ITransactionBroadcaster, TransactionBroadcastingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using core_library.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using reporting_service.Services;
@@ -13,6 +9,7 @@ namespace reporting_service.Controllers
     [Route( "report" )]
     public class ReportController : ControllerBase
     {
+        // Todo: all the incoming requests must be authenticated
         private readonly ILogger<ReportController> _logger;
         private readonly ITransactionService _transactionService;
 
@@ -27,6 +24,13 @@ namespace reporting_service.Controllers
         public IActionResult Get()
         {
             return new OkObjectResult( _transactionService.GetAllTransactions() );
+        }
+
+        [HttpPost]
+        [Route( "transaction" )]
+        public IActionResult Post(Transaction transaction)
+        {
+            return new OkObjectResult(_transactionService.AddTransaction(transaction));
         }
 
         [HttpGet]

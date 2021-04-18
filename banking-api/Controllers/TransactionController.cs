@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Threading.Tasks;
 using banking_api.Services;
-using core_library.Models;
+using core_library.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -12,33 +12,30 @@ namespace banking_api.Controllers
     public class TransactionController : ControllerBase
     {
         private readonly ILogger<TransactionController> _logger;
-        private readonly ITransactionService _transactionService;
+        private readonly ITransactionBroadcaster _transactionBroadCastingService;
 
-        public TransactionController( ILogger<TransactionController> logger, ITransactionService transactionService )
+        public TransactionController( ILogger<TransactionController> logger, ITransactionBroadcaster transactionBroadcastingService )
         {
             _logger = logger;
-            _transactionService = transactionService;
-        }
-
-        [HttpGet]
-        public ActionResult<IList<Transaction>> Get()
-        {
-            return new OkObjectResult( _transactionService.GetAllTransactions().ToList() );
+            _transactionBroadCastingService = transactionBroadcastingService;
         }
 
         [HttpPost]
-        public IActionResult Post( Transaction transaction )
+        public async Task<IActionResult> Post( TransactionDto transactionDto )
         {
-            _transactionService.AddTransaction( transaction );
 
-            return new OkObjectResult( transaction );
-        }
+            // Todo: make uri dynamically read from config
+            var uri = new Uri( "https://localhost:44341/report/transaction" );
 
-        [HttpGet]
-        [Route( "filtered" )]
-        public ActionResult<IList<Transaction>> FilteredTransactions( bool validTransactions = true )
-        {
-            return new OkObjectResult( _transactionService.GetValidOrSuspicious( validTransactions ).ToList() );
+            var result = await _transactionBroadCastingService.BroadcastTransaction( transactionDto, uri );
+
+            if( result.IsSuccessStatusCode )
+            {
+                return new OkResult();
+            }
+
+            // Todo: could be handled better
+            return new ObjectResult( result );
         }
     }
 }
